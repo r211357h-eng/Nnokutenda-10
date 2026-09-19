@@ -1,0 +1,23 @@
+import random
+
+def generate_random_numbers():
+    # Generate 5 random floating-point numbers between 0 and 10
+    random_numbers = [random.random() * 10 for _ in range(5)]
+    return random_numbers
+
+def calculate_min_max(numbers):
+    # Use built-in functions to calculate the minimum and maximum values
+    min_value = min(numbers)
+    max_value = max(numbers)
+    return min_value, max_value
+
+def main():
+    random_numbers = generate_random_numbers()
+    print("Random numbers:", random_numbers)
+
+    min_value, max_value = calculate_min_max(random_numbers)
+    print("Minimum value:", min_value)
+    print("Maximum value:", max_value)
+
+if __name__ == "__main__":
+    main()
