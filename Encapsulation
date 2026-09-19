@@ -1,0 +1,30 @@
+class BankAccount:
+    def __init__(self, owner, initial_balance=0):
+        self.owner = owner
+        self.__balance = initial_balance  # Private attribute
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposited {amount}. New balance: {self.__balance}")
+        else:
+            print("Invalid deposit amount.")
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            print(f"Withdrew {amount}. New balance: {self.__balance}")
+        else:
+            print("Invalid withdrawal amount or insufficient funds.")
+
+    def get_balance(self):
+        return self.__balance
+
+# Demonstration:
+account = BankAccount("Alice", 1000)
+account.deposit(500)
+account.withdraw(200)
+print(f"Current balance: {account.get_balance()}")
+
+# Trying to access the private attribute directly (will raise an AttributeError)
+# print(account.__balance)  # Uncommenting this line will cause an error
