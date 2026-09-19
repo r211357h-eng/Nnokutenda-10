@@ -1,0 +1,94 @@
+from abc import ABC, abstractmethod
+
+class FileHandler(ABC):
+    """
+    Abstract Base Class for all file handlers.
+    """
+    def __init__(self, file_path):
+        """
+        Initialize the file handler with a file path.
+        
+        Args:
+            file_path (str): The path to the file.
+        """
+        self.file_path = file_path
+
+    @abstractmethod
+    def read(self):
+        """
+        Read the content of the file.
+        
+        Returns:
+            str: The content of the file.
+        """
+        pass
+
+    @abstractmethod
+    def write(self, content):
+        """
+        Write content to the file.
+        
+        Args:
+            content (str): The content to write to the file.
+        """
+        pass
+
+class TextFileHandler(FileHandler):
+    """
+    Concrete class for handling text files.
+    """
+    def read(self):
+        """
+        Read the content of the text file.
+        
+        Returns:
+            str: The content of the text file.
+        """
+        with open(self.file_path, 'r') as file:
+            return file.read()
+
+    def write(self, content):
+        """
+        Write content to the text file.
+        
+        Args:
+            content (str): The content to write to the text file.
+        """
+        with open(self.file_path, 'w') as file:
+            file.write(content)
+
+class BinaryFileHandler(FileHandler):
+    """
+    Concrete class for handling binary files.
+    """
+    def read(self):
+        """
+        Read the content of the binary file.
+        
+        Returns:
+            bytes: The content of the binary file.
+        """
+        with open(self.file_path, 'rb') as file:
+            return file.read()
+
+    def write(self, content):
+        """
+        Write content to the binary file.
+        
+        Args:
+            content (bytes): The content to write to the binary file.
+        """
+        with open(self.file_path, 'wb') as file:
+            file.write(content)
+
+# Example usage:
+if __name__ == "__main__":
+    # Create a text file handler
+    text_file_handler = TextFileHandler('example.txt')
+    text_file_handler.write('Hello, world!')
+    print(text_file_handler.read())
+
+    # Create a binary file handler
+    binary_file_handler = BinaryFileHandler('example.bin')
+    binary_file_handler.write(b'Hello, world!')
+    print(binary_file_handler.read())
