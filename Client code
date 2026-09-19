@@ -1,0 +1,31 @@
+import socket
+
+def start_client():
+    # Create a socket object
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Connect to the server
+    client_socket.connect(("127.0.0.1", 12345))
+
+    print("Client is connected to the server.")
+
+    try:
+        # Send message to the server
+        message = "Hello from client!".encode()
+        client_socket.send(message)
+
+        # Receive response from the server
+        response = client_socket.recv(1024)
+        print(f"Received response: {response.decode()}")
+
+    except ConnectionRefusedError:
+        print("Connection refused by server.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+    finally:
+        # Close the socket
+        client_socket.close()
+
+if __name__ == "__main__":
+    start_client()
